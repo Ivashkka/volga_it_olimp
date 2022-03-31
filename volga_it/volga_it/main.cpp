@@ -3,52 +3,58 @@
 #include <conio.h>
 #include <cstdlib>
 #include <ctime>
+#include <windows.h>
 
-//int walk()
-//{
-//    for (int i = 0; i < 10000; ++i)
-//    {
-//        Direction direction;
-//
-//        switch (rand() % 4)
-//        {
-//        case 0:
-//            direction = Direction::Up;
-//            break;
-//
-//        case 1:
-//            direction = Direction::Down;
-//            break;
-//
-//        case 2:
-//            direction = Direction::Left;
-//            break;
-//
-//        default:
-//            direction = Direction::Right;
-//            break;
-//        }
-//
-//        if (world.canGo(Character::Ivan, direction) && world.go(direction, Direction::Pass))
-//            return world.getTurnCount();
-//    }
-//
-//    return 0;
-//}
+char get_axis()
+{
+        char direction;
+
+        switch (rand() % 4)
+        {
+        case 0:
+            direction = 'a';
+            break;
+
+        case 1:
+            direction = 'd';
+            break;
+
+        case 2:
+            direction = 's';
+            break;
+
+        default:
+            direction = 'w';
+            break;
+        }
+        return direction;
+
+}
 
 int main()
 {
     Fairyland world;
-    MapVisualizer map(&world, Character::Ivan);
+    MapVisualizer map2(&world, Character::Ivan);
+    MapVisualizer map(&world, Character::Elena);
 
-    map.UpdateMap();
+    map2.UpdateMap();
     
     char axis;
 
     while (true)
     {
+
+        //Sleep(500);
         axis = _getch();
+        system("cls");
+        /*axis = get_axis();
         map.MoveCharacter(axis);
+        std::cout << "\n\n";
+        axis = get_axis();*/
+
+        map2.MoveCharacter(axis);
+
+
     }
     /*srand(static_cast<unsigned int>(time(nullptr)));
 

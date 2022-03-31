@@ -1,7 +1,6 @@
 #include "fairy_tail.hpp"
 class MapVisualizer {
 
-
 	public:
 
 		MapVisualizer(Fairyland* world, Character character) {
@@ -12,19 +11,27 @@ class MapVisualizer {
 
 
 		void UpdateMap() {
-			system("cls");
+			//system("cls");
 			mapCharList[character_coords[0]][character_coords[1]] = character_symbol;
-			if (_world->canGo(_character, Direction::Left)) 
-				mapCharList[character_coords[0]][character_coords[1] - 1] = '.';
+			if (_world->canGo(_character, Direction::Left)) {
+				if(mapCharList[character_coords[0]][character_coords[1] - 1] != '-')
+					mapCharList[character_coords[0]][character_coords[1] - 1] = '.';
+			}
 			else mapCharList[character_coords[0]][character_coords[1] - 1] = '#';
-			if (_world->canGo(_character, Direction::Right))
-				mapCharList[character_coords[0]][character_coords[1] + 1] = '.';
+			if (_world->canGo(_character, Direction::Right)) {
+				if(mapCharList[character_coords[0]][character_coords[1] + 1] != '-')
+					mapCharList[character_coords[0]][character_coords[1] + 1] = '.';
+			}
 			else mapCharList[character_coords[0]][character_coords[1] + 1] = '#';
-			if (_world->canGo(_character, Direction::Up))
-				mapCharList[character_coords[0] - 1][character_coords[1]] = '.';
+			if (_world->canGo(_character, Direction::Up)) {
+				if(mapCharList[character_coords[0] - 1][character_coords[1]] != '-')
+					mapCharList[character_coords[0] - 1][character_coords[1]] = '.';
+			}
 			else mapCharList[character_coords[0] - 1][character_coords[1]] = '#';
-			if (_world->canGo(_character, Direction::Down))
-				mapCharList[character_coords[0] + 1][character_coords[1]] = '.';
+			if (_world->canGo(_character, Direction::Down)) {
+				if(mapCharList[character_coords[0] + 1][character_coords[1]] != '-')
+					mapCharList[character_coords[0] + 1][character_coords[1]] = '.';
+			}
 			else mapCharList[character_coords[0] + 1][character_coords[1]] = '#';
 			DrawMap();
 		}
@@ -32,7 +39,7 @@ class MapVisualizer {
 
 		void MoveCharacter(char axis) {
 			Direction direction = Direction::Pass;
-			mapCharList[character_coords[0]][character_coords[1]] = '.';
+			mapCharList[character_coords[0]][character_coords[1]] = '-';
 			switch (axis)
 			{
 			case 'a':
