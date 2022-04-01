@@ -24,6 +24,9 @@
     <ClCompile Include="MapVisualizer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="CharacterAI.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fairy_tail.hpp">

@@ -37,44 +37,31 @@ class MapVisualizer {
 		}
 
 
-		void MoveCharacter(char axis) {
-			Direction direction = Direction::Pass;
+		void MoveCharacter(Direction direction) {
 			mapCharList[character_coords[0]][character_coords[1]] = '-';
-			switch (axis)
+			switch (direction)
 			{
-			case 'a':
-				if (_world->canGo(_character, Direction::Left)) {
-					direction = Direction::Left;
-					character_coords[1] -= 1;
-				}
+			case Direction::Left:
+				character_coords[1] -= 1;
 				//std::cout << "Left";
 				break;
-			case 'd':
-				if (_world->canGo(_character, Direction::Right)) {
-					direction = Direction::Right;
-					character_coords[1] += 1;
-				}
+			case Direction::Right:
+				character_coords[1] += 1;
 				//std::cout << "Right";
 				break;
-			case 'w':
-				if (_world->canGo(_character, Direction::Up)) {
-					direction = Direction::Up;
-					character_coords[0] -= 1;
-				}
+			case Direction::Up:
+				character_coords[0] -= 1;
 				//std::cout << "Up";
 				break;
-			case 's':
-				if (_world->canGo(_character, Direction::Down)) {
-					direction = Direction::Down;
-					character_coords[0] += 1;
-				}
+			case Direction::Down:
+				character_coords[0] += 1;
 				//std::cout << "Down";
 				break;
 			default:
 				break;
 			}
 
-			switch (_character)
+			/*switch (_character)
 			{
 			case Character::Ivan:
 				_world->go(direction, Direction::Pass);
@@ -84,10 +71,15 @@ class MapVisualizer {
 				break;
 			default:
 				break;
-			}
+			}*/
 			UpdateMap();
 		}
-
+		Fairyland* GetMapWorld() {
+			return _world;
+		}
+		Character GetMapCharacter() {
+			return _character;
+		}
 
 	private:
 		Fairyland* _world;

@@ -142,6 +142,7 @@
     <ClCompile Include="fairy_tail.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapVisualizer.cpp" />
+    <ClCompile Include="CharacterAI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fairy_tail.hpp" />

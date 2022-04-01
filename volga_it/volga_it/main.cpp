@@ -1,58 +1,93 @@
 #include "fairy_tail.hpp"
-#include "MapVisualizer.cpp"
+#include "CharacterAI.cpp"
 #include <conio.h>
 #include <cstdlib>
-#include <ctime>
+#include <ctime>`
 #include <windows.h>
 
-char get_axis()
+Direction get_axis()
 {
-        char direction;
+        Direction direction;
 
         switch (rand() % 4)
         {
         case 0:
-            direction = 'a';
+            direction = Direction::Left;
             break;
 
         case 1:
-            direction = 'd';
+            direction = Direction::Right;
             break;
 
         case 2:
-            direction = 's';
+            direction = Direction::Down;
             break;
 
         default:
-            direction = 'w';
+            direction = Direction::Up;
             break;
         }
         return direction;
 
 }
 
+Direction GetCharDirection() {
+    char axis;
+    axis = _getch();
+    switch (axis)
+    {
+    case 'a':
+        return Direction::Left;
+        break;
+    case 'd':
+        return Direction::Right;
+        break;
+    case 's':
+        return Direction::Down;
+        break;
+    case 'w':
+        return Direction::Up;
+        break;
+    default:
+        break;
+    }
+}
+std::string str_can_go(Character _check_character, Direction _check_dir, Fairyland* _land) {
+    if (_land->canGo(_check_character, _check_dir)) return "CAN";
+    else return "CANT";
+}
+
 int main()
 {
     Fairyland world;
-    MapVisualizer map2(&world, Character::Ivan);
-    MapVisualizer map(&world, Character::Elena);
-
-    map2.UpdateMap();
     
-    char axis;
+    MapVisualizer mapIvan(&world, Character::Ivan);
+    MapVisualizer mapElena(&world, Character::Elena);
+
+    CharacterAI IvanAI(&mapIvan);
+    CharacterAI ElenaAI(&mapElena);
+
+    mapIvan.UpdateMap();
+    std::cout << "\n\n";
+    mapElena.UpdateMap();
+    char manual_axis;
 
     while (true)
     {
 
-        //Sleep(500);
-        axis = _getch();
+        manual_axis = _getch();
         system("cls");
-        /*axis = get_axis();
-        map.MoveCharacter(axis);
-        std::cout << "\n\n";
-        axis = get_axis();*/
+        
+        IvanAI.ManualTurn(manual_axis);
+        //IvanAI.doTurn();
+        std::cout << "\t" << str_can_go(Character::Ivan, Direction::Up, &world) << '\n';
+        std::cout << str_can_go(Character::Ivan, Direction::Left, &world) 
+            << "\t\t" << str_can_go(Character::Ivan, Direction::Right, &world) << '\n';
+        std::cout << "\t" << str_can_go(Character::Ivan, Direction::Down, &world) << '\n';
+        //std::cout << "\n\n";
+        //ElenaAI.doTurn();
 
-        map2.MoveCharacter(axis);
+        //Sleep(500);
 
 
     }
