@@ -80,6 +80,27 @@ class MapVisualizer {
 		Character GetMapCharacter() {
 			return _character;
 		}
+		char GetCharInMap(int node_y, int node_x) {
+			char node;
+			node = mapCharList[node_y][node_x];
+			return node;
+		}
+		void PrintMapInfo() {
+			switch (_character)
+			{
+			case Character::Ivan:
+				std::cout << "map: IvanMap, character: Ivan\n";
+				break;
+			case Character::Elena:
+				std::cout << "map: ElenaMap, character: Elena\n";
+				break;
+			default:
+				break;
+			}
+		}
+		int* GetCharacterCoords() {
+			return character_coords;
+		}
 
 	private:
 		Fairyland* _world;

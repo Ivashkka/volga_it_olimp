@@ -2,7 +2,7 @@
 #include "CharacterAI.cpp"
 #include <conio.h>
 #include <cstdlib>
-#include <ctime>`
+#include <ctime>
 #include <windows.h>
 
 Direction get_axis()
@@ -64,30 +64,32 @@ int main()
     MapVisualizer mapIvan(&world, Character::Ivan);
     MapVisualizer mapElena(&world, Character::Elena);
 
-    CharacterAI IvanAI(&mapIvan);
-    CharacterAI ElenaAI(&mapElena);
+    bool in_game = true;
+    CharacterAI IvanAI(&mapIvan, &in_game);
+    CharacterAI ElenaAI(&mapElena, &in_game);
 
     mapIvan.UpdateMap();
     std::cout << "\n\n";
     mapElena.UpdateMap();
     char manual_axis;
 
-    while (true)
+    while (in_game)
     {
 
-        manual_axis = _getch();
+        //manual_axis = _getch();
         system("cls");
-        
-        IvanAI.ManualTurn(manual_axis);
-        //IvanAI.doTurn();
-        std::cout << "\t" << str_can_go(Character::Ivan, Direction::Up, &world) << '\n';
-        std::cout << str_can_go(Character::Ivan, Direction::Left, &world) 
-            << "\t\t" << str_can_go(Character::Ivan, Direction::Right, &world) << '\n';
-        std::cout << "\t" << str_can_go(Character::Ivan, Direction::Down, &world) << '\n';
-        //std::cout << "\n\n";
-        //ElenaAI.doTurn();
+        //IvanAI.ManualTurn(manual_axis);
+        mapIvan.PrintMapInfo();
+        IvanAI.doTurn();
+        //std::cout << "\t" << str_can_go(Character::Ivan, Direction::Up, &world) << '\n';
+        //std::cout << str_can_go(Character::Ivan, Direction::Left, &world) 
+        //    << "\t\t" << str_can_go(Character::Ivan, Direction::Right, &world) << '\n';
+        //std::cout << "\t" << str_can_go(Character::Ivan, Direction::Down, &world) << '\n';
+        std::cout << "\n";
+        mapElena.PrintMapInfo();
+        ElenaAI.doTurn();
 
-        //Sleep(500);
+        Sleep(200);
 
 
     }
