@@ -65,8 +65,9 @@ int main()
     MapVisualizer mapElena(&world, Character::Elena);
 
     bool in_game = true;
-    CharacterAI IvanAI(&mapIvan, &in_game);
-    CharacterAI ElenaAI(&mapElena, &in_game);
+    int turn_count = 0;
+    CharacterAI IvanAI(&mapIvan, &in_game, &turn_count);
+    CharacterAI ElenaAI(&mapElena, &in_game, &turn_count);
 
     mapIvan.UpdateMap();
     std::cout << "\n\n";
@@ -85,13 +86,21 @@ int main()
         //std::cout << str_can_go(Character::Ivan, Direction::Left, &world) 
         //    << "\t\t" << str_can_go(Character::Ivan, Direction::Right, &world) << '\n';
         //std::cout << "\t" << str_can_go(Character::Ivan, Direction::Down, &world) << '\n';
-        std::cout << "\n";
-        mapElena.PrintMapInfo();
-        ElenaAI.doTurn();
+        //std::cout << "\n";
+        //mapElena.PrintMapInfo();
+        //ElenaAI.doTurn();
 
-        Sleep(200);
-
-
+        Sleep(100);
+    }
+    system("cls");
+    std::cout << "Final map:\n";
+    mapIvan.PrintFinalMap();
+    switch (turn_count)
+    {
+    case 0:
+        std::cout << "\nThere is no possible solution!\n";
+    default:
+        std::cout << "\nSolution found in " << turn_count << "!\n";;
     }
     /*srand(static_cast<unsigned int>(time(nullptr)));
 

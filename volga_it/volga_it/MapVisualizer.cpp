@@ -102,6 +102,42 @@ class MapVisualizer {
 			return character_coords;
 		}
 
+		void PrintFinalMap() {
+			int start_y, end_y, start_x, end_x;
+			start_x = end_x = start_y = end_y = 0;
+			bool init = true;
+			for (int y = 0; y < map_size; y++)
+			{
+				for (int x = 0; x < map_size; x++)
+				{
+					if (mapCharList[y][x] != '?')
+					{
+						if (init)
+						{
+							init = false;
+							start_x = x;
+							end_x = x;
+							start_y = y;
+							end_y = y;
+						}
+						if ( x < start_x ) {
+							start_x = x;
+						}
+						if (x > end_x) {
+							end_x = x;
+						}
+						if (y < start_y) {
+							start_y = y;
+						}
+						if (y > end_y) {
+							end_y = y;
+						}
+					}
+				}
+			}
+			DrawMap(start_y, end_y, start_x, end_x);
+		}
+
 	private:
 		Fairyland* _world;
 		Character _character;
@@ -134,10 +170,12 @@ class MapVisualizer {
 		}
 
 
-		void DrawMap() {
-			for (int i = 0; i < map_size; i++)
+		void DrawMap(int start_y = 0, int end_y = map_size,
+			int start_x = 0, int end_x = map_size) {
+			
+			for (int i = start_y; i < end_y; i++)
 			{
-				for (int j = 0; j < map_size; j++)
+				for (int j = start_x; j < end_x; j++)
 				{
 					std::cout << mapCharList[i][j];
 				}
