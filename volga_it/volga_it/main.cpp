@@ -26,7 +26,9 @@ int main()
         Sleep(10); // turn delay
     }
     system("cls");
-    std::cout << "Final map:\n"; // print final map view
+    std::cout << "Final map:\n"; // print final map view 
+    //( "-" symbol on map means that character can go to this point, but he hasn't been there yet
+    // "." means that character has already been there)
     mapIvan.PrintFinalMap();
     switch (turn_count) // Print turn_count if we found the way
     {

@@ -68,13 +68,13 @@ private:
         Direction my_direction = Direction::Pass;
         UpdateCharacterCoords();
 
-        if (_map->GetCharInMap(character_coords[0], character_coords[1] - 1) == '.')
+        if (_map->GetCharInMap(character_coords[0], character_coords[1] - 1) == '-')
             my_direction = Direction::Left;
-        else if (_map->GetCharInMap(character_coords[0], character_coords[1] + 1) == '.')
+        else if (_map->GetCharInMap(character_coords[0], character_coords[1] + 1) == '-')
             my_direction = Direction::Right;
-        else if (_map->GetCharInMap(character_coords[0] - 1, character_coords[1]) == '.')
+        else if (_map->GetCharInMap(character_coords[0] - 1, character_coords[1]) == '-')
             my_direction = Direction::Up;
-        else if (_map->GetCharInMap(character_coords[0] + 1, character_coords[1]) == '.')
+        else if (_map->GetCharInMap(character_coords[0] + 1, character_coords[1]) == '-')
             my_direction = Direction::Down;
         else {
             directions_count -= 1;

@@ -13,23 +13,23 @@ class MapVisualizer {
 		void UpdateMap() {
 			mapCharList[character_coords[0]][character_coords[1]] = character_symbol;
 			if (_world->canGo(_character, Direction::Left)) {
-				if(mapCharList[character_coords[0]][character_coords[1] - 1] != '-')
-					mapCharList[character_coords[0]][character_coords[1] - 1] = '.';
+				if(mapCharList[character_coords[0]][character_coords[1] - 1] != '.')
+					mapCharList[character_coords[0]][character_coords[1] - 1] = '-';
 			}
 			else mapCharList[character_coords[0]][character_coords[1] - 1] = '#';
 			if (_world->canGo(_character, Direction::Right)) {
-				if(mapCharList[character_coords[0]][character_coords[1] + 1] != '-')
-					mapCharList[character_coords[0]][character_coords[1] + 1] = '.';
+				if(mapCharList[character_coords[0]][character_coords[1] + 1] != '.')
+					mapCharList[character_coords[0]][character_coords[1] + 1] = '-';
 			}
 			else mapCharList[character_coords[0]][character_coords[1] + 1] = '#';
 			if (_world->canGo(_character, Direction::Up)) {
-				if(mapCharList[character_coords[0] - 1][character_coords[1]] != '-')
-					mapCharList[character_coords[0] - 1][character_coords[1]] = '.';
+				if(mapCharList[character_coords[0] - 1][character_coords[1]] != '.')
+					mapCharList[character_coords[0] - 1][character_coords[1]] = '-';
 			}
 			else mapCharList[character_coords[0] - 1][character_coords[1]] = '#';
 			if (_world->canGo(_character, Direction::Down)) {
-				if(mapCharList[character_coords[0] + 1][character_coords[1]] != '-')
-					mapCharList[character_coords[0] + 1][character_coords[1]] = '.';
+				if(mapCharList[character_coords[0] + 1][character_coords[1]] != '.')
+					mapCharList[character_coords[0] + 1][character_coords[1]] = '-';
 			}
 			else mapCharList[character_coords[0] + 1][character_coords[1]] = '#';
 			DrawMap();
@@ -37,7 +37,7 @@ class MapVisualizer {
 
 
 		void MoveCharacter(Direction direction) {
-			mapCharList[character_coords[0]][character_coords[1]] = '-';
+			mapCharList[character_coords[0]][character_coords[1]] = '.';
 			switch (direction)
 			{
 			case Direction::Left:
