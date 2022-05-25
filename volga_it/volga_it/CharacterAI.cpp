@@ -77,12 +77,12 @@ private:
         else if (_map->GetCharInMap(character_coords[0] + 1, character_coords[1]) == '-')
             my_direction = Direction::Down;
         else {
-            directions_count -= 1;
-            my_direction = GetOppositeDirection(past_directions[directions_count]);
             if (directions_count <= 0) {
                 *_turn_count = 0;
                 *_character_in_game = false;
             }
+            directions_count -= 1;
+            my_direction = GetOppositeDirection(past_directions[directions_count]);
             return my_direction;
         }
         past_directions[directions_count] = my_direction;
