@@ -68,11 +68,6 @@ private:
         Direction my_direction = Direction::Pass;
         UpdateCharacterCoords();
 
-        /*std::cout << "\n\t" << _map->GetCharInMap(character_coords[0] - 1, character_coords[1]) << '\n';
-        std::cout << _map->GetCharInMap(character_coords[0], character_coords[1] - 1) << "\t\t";
-        std::cout << _map->GetCharInMap(character_coords[0], character_coords[1] + 1) << '\n';
-        std::cout << '\t' << _map->GetCharInMap(character_coords[0] + 1, character_coords[1]) << '\n';*/
-
         if (_map->GetCharInMap(character_coords[0], character_coords[1] - 1) == '.')
             my_direction = Direction::Left;
         else if (_map->GetCharInMap(character_coords[0], character_coords[1] + 1) == '.')
@@ -82,11 +77,9 @@ private:
         else if (_map->GetCharInMap(character_coords[0] + 1, character_coords[1]) == '.')
             my_direction = Direction::Down;
         else {
-            //std::cout << "Where is no . on map\n";
             directions_count -= 1;
             my_direction = GetOppositeDirection(past_directions[directions_count]);
             if (directions_count <= 0) {
-                //std::cout << "There is no possible solution!\n";
                 *_turn_count = 0;
                 *_character_in_game = false;
             }
@@ -102,14 +95,12 @@ private:
         {
         case Character::Ivan:
             if (_world->go(_dir, Direction::Pass)) {
-                //std::cout << "Solution found in " << _world->getTurnCount() << "!\n";
                 *_turn_count = _world->getTurnCount();
                 *_character_in_game = false;
             }
             break;
         case Character::Elena:
             if (_world->go(Direction::Pass, _dir)) {
-                //std::cout << "Solution found in " << _world->getTurnCount() << "!\n";
                 *_turn_count = _world->getTurnCount();
                 *_character_in_game = false;
             }

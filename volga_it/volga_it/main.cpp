@@ -5,109 +5,36 @@
 #include <ctime>
 #include <windows.h>
 
-Direction get_axis()
-{
-        Direction direction;
-
-        switch (rand() % 4)
-        {
-        case 0:
-            direction = Direction::Left;
-            break;
-
-        case 1:
-            direction = Direction::Right;
-            break;
-
-        case 2:
-            direction = Direction::Down;
-            break;
-
-        default:
-            direction = Direction::Up;
-            break;
-        }
-        return direction;
-
-}
-
-Direction GetCharDirection() {
-    char axis;
-    axis = _getch();
-    switch (axis)
-    {
-    case 'a':
-        return Direction::Left;
-        break;
-    case 'd':
-        return Direction::Right;
-        break;
-    case 's':
-        return Direction::Down;
-        break;
-    case 'w':
-        return Direction::Up;
-        break;
-    default:
-        break;
-    }
-}
-std::string str_can_go(Character _check_character, Direction _check_dir, Fairyland* _land) {
-    if (_land->canGo(_check_character, _check_dir)) return "CAN";
-    else return "CANT";
-}
-
 int main()
 {
-    Fairyland world;
+    Fairyland world; // create world
     
-    MapVisualizer mapIvan(&world, Character::Ivan);
-    MapVisualizer mapElena(&world, Character::Elena);
+    MapVisualizer mapIvan(&world, Character::Ivan); // create map with Character (also can be Elena)
 
-    bool in_game = true;
+    bool in_game = true; // if our Character still moving cross the map
     int turn_count = 0;
-    CharacterAI IvanAI(&mapIvan, &in_game, &turn_count);
-    CharacterAI ElenaAI(&mapElena, &in_game, &turn_count);
+    CharacterAI IvanAI(&mapIvan, &in_game, &turn_count); // create Ivan Character AI
 
-    mapIvan.UpdateMap();
-    std::cout << "\n\n";
-    mapElena.UpdateMap();
-    char manual_axis;
+    mapIvan.UpdateMap(); // First drawing Character's map
 
-    while (in_game)
+    while (in_game) // main cycle
     {
 
-        //manual_axis = _getch();
-        system("cls");
-        //IvanAI.ManualTurn(manual_axis);
-        mapIvan.PrintMapInfo();
-        IvanAI.doTurn();
-        //std::cout << "\t" << str_can_go(Character::Ivan, Direction::Up, &world) << '\n';
-        //std::cout << str_can_go(Character::Ivan, Direction::Left, &world) 
-        //    << "\t\t" << str_can_go(Character::Ivan, Direction::Right, &world) << '\n';
-        //std::cout << "\t" << str_can_go(Character::Ivan, Direction::Down, &world) << '\n';
-        //std::cout << "\n";
-        //mapElena.PrintMapInfo();
-        //ElenaAI.doTurn();
-
-        Sleep(100);
+        system("cls"); //clear console
+        mapIvan.PrintMapInfo(); // print info about current map
+        IvanAI.doTurn(); // Character's AI moves the character
+        Sleep(10); // turn delay
     }
     system("cls");
-    std::cout << "Final map:\n";
+    std::cout << "Final map:\n"; // print final map view
     mapIvan.PrintFinalMap();
-    switch (turn_count)
+    switch (turn_count) // Print turn_count if we found the way
     {
     case 0:
         std::cout << "\nThere is no possible solution!\n";
     default:
         std::cout << "\nSolution found in " << turn_count << "!\n";;
     }
-    /*srand(static_cast<unsigned int>(time(nullptr)));
-
-    if (const int turns = walk())
-        std::cout << "Found in " << turns << " turns" << std::endl;
-    else
-        std::cout << "Not found" << std::endl;*/
 
     return 0;
 }

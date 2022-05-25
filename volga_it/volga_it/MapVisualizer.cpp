@@ -11,7 +11,6 @@ class MapVisualizer {
 
 
 		void UpdateMap() {
-			//system("cls");
 			mapCharList[character_coords[0]][character_coords[1]] = character_symbol;
 			if (_world->canGo(_character, Direction::Left)) {
 				if(mapCharList[character_coords[0]][character_coords[1] - 1] != '-')
@@ -43,35 +42,19 @@ class MapVisualizer {
 			{
 			case Direction::Left:
 				character_coords[1] -= 1;
-				//std::cout << "Left";
 				break;
 			case Direction::Right:
 				character_coords[1] += 1;
-				//std::cout << "Right";
 				break;
 			case Direction::Up:
 				character_coords[0] -= 1;
-				//std::cout << "Up";
 				break;
 			case Direction::Down:
 				character_coords[0] += 1;
-				//std::cout << "Down";
 				break;
 			default:
 				break;
 			}
-
-			/*switch (_character)
-			{
-			case Character::Ivan:
-				_world->go(direction, Direction::Pass);
-				break;
-			case Character::Elena:
-				_world->go(Direction::Pass, direction);
-				break;
-			default:
-				break;
-			}*/
 			UpdateMap();
 		}
 		Fairyland* GetMapWorld() {
